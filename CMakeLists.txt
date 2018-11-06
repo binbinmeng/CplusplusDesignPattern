@@ -8,4 +8,5 @@ add_executable(CplusplusDesignPatten
         #Factory.cpp
         #AbstractFactory.cpp
         #TemplateClass.cpp
-        MultiThreads.cpp)
+        #MultiThreads.cpp
+        Strategy.cpp)

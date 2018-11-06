@@ -22,6 +22,12 @@ void thread_task2(std::string str) {
               //<< std::this_thread::get_id()<<std::endl;
               //<< " paused " << n << " seconds" << std::endl;
 }
+class Person{
+public:
+    void print(){
+        std::cout<<"I am a person !"<<std::endl;
+    }
+};
 
 /*
  * ===  FUNCTION  =========================================================
@@ -33,11 +39,16 @@ int main(int argc, const char *argv[])
 {
     std::thread threads[50];
     std::cout << "Spawning 5 threads...\n";
+
+    Person person;
+
     for (int i = 0; i < 50; i++) {
-        if(i<25)
-            threads[i] = std::thread(thread_task1, "hello1 ...");
+        if(i<10)
+            threads[i] = std::thread(&thread_task1, std::move("hello1 ..."));
+        else if(i>=10 &&i<30)
+            threads[i] = std::thread(&thread_task2, std::move("hello2 ..."));
         else
-            threads[i] = std::thread(thread_task2, "hello2 ...");
+            threads[i] = std::thread(&Person::print,&person);
     }
     std::cout << "Done spawning threads! Now wait for them to join\n";
     for (auto& t: threads) {
